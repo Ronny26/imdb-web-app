@@ -7,8 +7,6 @@ const BASE_API = "http://localhost:4000/api";
 export const USERS_API = `${BASE_API}/users`;
 export const signin = async (credentials) => {
   const response = await request.post( `${USERS_API}/signin`, credentials );
-
-  console.log(response)
   return response.data;
 };
 

@@ -2,22 +2,22 @@ import * as client from "./client";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
- 
+import { useAuth } from "./authenticateUser";
+
 function Signin() {
   const [credentials, setCredentials] = useState({ username: "", password: "" });
   const [showError, setShowError] = useState(false);
+  const { signin, setCurrentUser } = useAuth();
   const navigate = useNavigate();
-  const signin = async () => {
-    await client.signin(credentials);
-
-  };
   const handleSignin = async () => {
     try{
-        await client.signin(credentials);
+        const user = await signin(credentials);
+        console.log(user)
+        setCurrentUser(user);
         navigate("/");
     }
     catch (error) {
-        console.log("error")
+        console.log("error", error);
         if (error.response && error.response.status === 401) {
 
             setShowError("Incorrect username or password. Please try again.");

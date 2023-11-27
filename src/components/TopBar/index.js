@@ -1,9 +1,29 @@
 import React from "react";
 import { VscAccount } from "react-icons/vsc";
-import { Link, NavLink } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./index.css";
-
+import useAuth from "../users/authenticateUser.js"
 const TopBar = () => {
+  const navigate = useNavigate();
+  const { currentUser, signout } = useAuth();
+
+  const handleUserIconClick = () => {
+    console.log("handle user icon");
+    console.log(currentUser);
+    if (currentUser) {
+      console.log("if");
+      navigate("/profile");
+    } else {
+      console.log("else");
+      navigate("/signin");
+    }
+  };
+
+  const handleSignout = async () => {
+    await signout();
+    navigate("/");
+  };
+
   return (
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
       <div class="container-fluid">
@@ -35,12 +55,20 @@ const TopBar = () => {
                     class="form-control"
                     placeholder="Search"
                   />
-                  <Link to="/signin" className="im-icon" href="">
+                  <Link to={currentUser ? "/profile" : "/signin"} onClick={handleUserIconClick} className="im-icon">
                      <VscAccount/>
                   </Link>
                 </div>
               </form>
             </li>
+            {currentUser && (
+              <li>
+                {}
+                <button onClick={handleSignout} className="btn btn-link">
+                  Sign Out
+                </button>
+              </li>
+            )}
           </ul>
         </div>
       </div>
