@@ -1,6 +1,6 @@
 import React from "react";
 import { VscAccount } from "react-icons/vsc";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import "./index.css";
 
 const TopBar = () => {
@@ -35,19 +35,12 @@ const TopBar = () => {
                     class="form-control"
                     placeholder="Search"
                   />
-                  <a className="im-icon">
-                    <VscAccount/>
-                  </a>
+                  <Link to="/signin" className="im-icon" href="">
+                     <VscAccount/>
+                  </Link>
                 </div>
               </form>
             </li>
-            {/* <li>
-              <div class="form-group">
-                <Link>
-                  <VscAccount />
-                </Link>
-              </div>
-            </li> */}
           </ul>
         </div>
       </div>
