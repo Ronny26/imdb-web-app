@@ -40,9 +40,9 @@ const TopBar = () => {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">
+          <Link class="navbar-brand" to="/">
             IMDB
-          </a>
+          </Link>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
