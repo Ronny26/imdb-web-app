@@ -102,8 +102,11 @@ function Signup() {
                 type="date"
                 className="form-control"
                 value={credentials.dob}
-                onChange={(e) =>
-                    setCredentials({ ...credentials, dob: e.target.value })
+                onChange={(e) => {
+                    const datePart = e.target.value.split("T")[0];
+                    setCredentials({ ...credentials, dob: datePart })
+                }
+                    
                 }/>
             </div>
         </div>
