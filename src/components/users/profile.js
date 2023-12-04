@@ -28,7 +28,6 @@ function Profile() {
     }, [userDetails]);
     return (
         <div>
-            <TopBar/>
              <div className="profile-container mt-5">
       {userDetails ? (
         <div>
@@ -38,9 +37,14 @@ function Profile() {
             <p>First Name: {userDetails.firstName}</p>
             <p>Last Name: {userDetails.lastName}</p>
             <p>Date of Birth: {userDetails.dob ? new Date(userDetails.dob).toLocaleDateString('en-US', { timeZone: 'UTC' }) : ""}</p>
-            <Link to="/edit" className="btn btn-primary me-2 fs-1">
+            <Link  to="/edit" className="btn btn-primary me-2 fs-1">
               Edit 
             </Link>
+            {userDetails.role === "ADMIN" && (
+                <Link to="/users" className="btn btn-primary me-2 fs-1" style={{marginLeft:20}}>
+                    Show All Users
+                </Link>
+            )}
           </div>
         </div>
       ) : (

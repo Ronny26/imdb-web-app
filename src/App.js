@@ -6,6 +6,7 @@ import Signup from "./components/users/signup";
 import Profile from "./components/users/profile";
 import Edit from "./components/users/edit";
 import Home from "./pages/Home";
+import UserTable from "./components/users/allUsers";
 function App() {
   return(
     <Router>
@@ -17,6 +18,7 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/profile" element={<Profile />}/>
         <Route path="/edit" element={<Edit/>} />
+        <Route path="/users" element={<UserTable/>} />
       </Routes>
     </div>
     </Router>

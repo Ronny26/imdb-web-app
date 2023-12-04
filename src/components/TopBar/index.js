@@ -25,12 +25,14 @@ const TopBar = () => {
   };
 
   return (
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div style={{backgroundColor:"black"}}>
+
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <div class="container-fluid">
         <div class="navbar-header">
           <button
             type="button"
-            class="navbar-toggle collapsed"
+            class="navbar-toggle collapsed" 
             data-toggle="collapse"
             data-target="#bs-example-navbar-collapse-1"
             aria-expanded="false"
@@ -40,7 +42,7 @@ const TopBar = () => {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <Link class="navbar-brand" to="/">
+          <Link class="navbar-brand" to="/" style={{backgroundColor: "black"}}>
             IMDB
           </Link>
         </div>
@@ -48,12 +50,12 @@ const TopBar = () => {
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="active">
-              <a href="#">
+              <Link to="/" style={{backgroundColor: "black"}}>
                 Home <span class="sr-only">(current)</span>
-              </a>
+              </Link>
             </li>
             <li>
-              <a href="#">Watchlist</a>
+              <Link to="/" style={{backgroundColor: "black"}}>Watchlist</Link>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right list-group">
@@ -83,6 +85,9 @@ const TopBar = () => {
         </div>
       </div>
     </nav>
+
+    </div>
+
   );
 };
 

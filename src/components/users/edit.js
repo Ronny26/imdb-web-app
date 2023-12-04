@@ -61,7 +61,6 @@ function Edit() {
 
     return (
     <div style={{marginLeft: 50}}>
-        <TopBar/>
         <h1 className="profile-header">Edit Profile</h1>
             <label for="username" className="form-label">
             Username
