@@ -5,6 +5,7 @@ const request = axios.create({
 
 const BASE_API = "http://localhost:4000/api";
 export const USERS_API = `${BASE_API}/users`;
+export const REVIEWS_API = `${BASE_API}/reviews`
 export const getCurrentUser = async() => {
     
 }
@@ -42,6 +43,12 @@ export const findAllUsers = async () => {
   };
   export const signout = async () => {
     const response = await request.post(`${USERS_API}/signout`);
+    return response.data;
+  };
+
+  export const getUserReviews = async (userId) => {
+    console.log("review user id", userId)
+    const response = await request.get(`${REVIEWS_API}/user/${userId}`);
     return response.data;
   };
   

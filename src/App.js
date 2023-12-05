@@ -7,6 +7,8 @@ import Profile from "./components/users/profile";
 import Edit from "./components/users/edit";
 import Home from "./pages/Home";
 import UserTable from "./components/users/allUsers";
+import UserDeatils from "./components/users/userDetailsPage";
+import Reviews from "./components/users/reviews";
 function App() {
   return(
     <Router>
@@ -16,9 +18,11 @@ function App() {
         <Route path="/"         element={<Home/>}/>
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
-        <Route path="/profile" element={<Profile />}/>
+        <Route path="/UserDeatils" element={<UserDeatils />}/>
+        <Route path="/profile" element={<Profile/>} />
         <Route path="/edit" element={<Edit/>} />
         <Route path="/users" element={<UserTable/>} />
+        <Route path="reviews" element={<Reviews/>}/>
       </Routes>
     </div>
     </Router>
