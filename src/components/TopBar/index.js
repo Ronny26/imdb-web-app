@@ -42,11 +42,7 @@ const TopBar = () => {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-<<<<<<< HEAD
           <Link class="navbar-brand" to="/" style={{backgroundColor: "black"}}>
-=======
-          <a class="navbar-brand" href="/">
->>>>>>> vamshika
             IMDB
           </Link>
         </div>
@@ -54,20 +50,12 @@ const TopBar = () => {
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="active">
-<<<<<<< HEAD
               <Link to="/" style={{backgroundColor: "black"}}>
-=======
-              <a href="/" class="link-dark">
->>>>>>> vamshika
                 Home <span class="sr-only">(current)</span>
               </Link>
             </li>
             <li>
-<<<<<<< HEAD
               <Link to="/" style={{backgroundColor: "black"}}>Watchlist</Link>
-=======
-              <a href="/watchlist" class="link-dark">Watchlist</a>
->>>>>>> vamshika
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right list-group">
