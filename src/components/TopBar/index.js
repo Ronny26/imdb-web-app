@@ -55,6 +55,9 @@ const TopBar = () => {
             <li>
               <a href="#">Watchlist</a>
             </li>
+            <li>
+            <Link to="/search">Search Movies</Link>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right list-group">
             <li>
