@@ -15,6 +15,12 @@
     text-wrap: wrap;
     font-weight: bold;
 }
+
+.im-movie-rating{
+    font-weight: bold;
+    font-size: 2em;
+    color: red;
+}
 /* .im-movie-title-description a {
   color: #d41b2c;
   text-decoration: none;
