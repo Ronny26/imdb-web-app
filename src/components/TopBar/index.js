@@ -57,6 +57,9 @@ const TopBar = () => {
             <li>
               <Link to="/" style={{backgroundColor: "black"}}>Watchlist</Link>
             </li>
+            <li>
+            <Link to="/search">Search Movies</Link>
+            </li>
           </ul>
           <ul class="nav navbar-nav navbar-right list-group">
             <li>

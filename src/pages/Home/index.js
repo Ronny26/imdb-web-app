@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
+
+import SearchPage from "../search/index";
 import * as client from "./client";
 import Movie from "../../components/Movie/movie";
 import "./index.css"
@@ -16,7 +19,6 @@ const Home = () => {
       console.error("Error fetching movies:", error);
     }
   }
-
   const getUpcomingMovies = async () => {
     try {
       const response = await client.getUpcomingTitles();
@@ -41,6 +43,7 @@ const Home = () => {
   }, []);
 
   return (
+
     <div className="container">
     <h4>Upcoming Movies</h4>
     <div style={{ display: 'flex', flexWrap: 'wrap' }}>

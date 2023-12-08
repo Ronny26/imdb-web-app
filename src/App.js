@@ -9,13 +9,15 @@ import Home from "./pages/Home";
 import UserTable from "./components/users/allUsers";
 import UserDeatils from "./components/users/userDetailsPage";
 import Reviews from "./components/users/reviews";
+import SearchPage from './pages/search'
 function App() {
   return(
     <Router>
-      <div className="d-flex flex-column">
+      <div className='d-flex flex-column'>
         <TopBar />
       <Routes>
         <Route path="/"         element={<Home/>}/>
+         <Route path='/search' element={<SearchPage />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/UserDeatils" element={<UserDeatils />}/>
@@ -27,8 +29,6 @@ function App() {
     </div>
     </Router>
   )
-
-
 }
 
-export default App;
+export default App
