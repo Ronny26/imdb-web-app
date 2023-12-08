@@ -44,7 +44,7 @@ const TopBar = () => {
           </button>
           <Link class="navbar-brand" to="/" style={{backgroundColor: "black"}}>
             IMDB
-          </Link>
+          </a>
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -52,7 +52,7 @@ const TopBar = () => {
             <li class="active">
               <Link to="/" style={{backgroundColor: "black"}}>
                 Home <span class="sr-only">(current)</span>
-              </Link>
+              </a>
             </li>
             <li>
               <Link to="/" style={{backgroundColor: "black"}}>Watchlist</Link>

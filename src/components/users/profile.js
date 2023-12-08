@@ -3,7 +3,7 @@ import { useAuth } from "../users/authenticateUser";
 import * as client from "./client";
 import { Link } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import TopBar from "../TopBar";
+import UserDeatils from "./userDetailsPage";
 function Profile() {
     const { currentUser } = useAuth();
     const [userDetails, setUserDetails] = useState(null);
@@ -17,7 +17,8 @@ function Profile() {
             console.error("Error fetching user details", error);
         }
         };
-    
+
+        
         if (currentUser) {
           fetchUserDetails();
         }
@@ -27,7 +28,8 @@ function Profile() {
         console.log("userDetails.dob:", userDetails ? userDetails.dob : null);
     }, [userDetails]);
     return (
-        <div>
+        <div style={{position: "absolute"}}>
+            <UserDeatils/>
              <div className="profile-container mt-5">
       {userDetails ? (
         <div>
@@ -37,6 +39,8 @@ function Profile() {
             <p>First Name: {userDetails.firstName}</p>
             <p>Last Name: {userDetails.lastName}</p>
             <p>Date of Birth: {userDetails.dob ? new Date(userDetails.dob).toLocaleDateString('en-US', { timeZone: 'UTC' }) : ""}</p>
+            
+
             <Link  to="/edit" className="btn btn-primary me-2 fs-1">
               Edit 
             </Link>
@@ -51,8 +55,7 @@ function Profile() {
         <Link to="/signin"></Link>
       )}
     </div>
-        </div>
-       
+        </div>  
     );
 }
 export default Profile;
