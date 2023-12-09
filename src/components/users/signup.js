@@ -13,8 +13,8 @@ function Signup() {
         navigate("/");
     }
     catch (error) {
-        console.log("error")
-        if (error.response && error.response.status === 401) {
+        console.log("error", error)
+        if (error.response && error.response.status === 400) {
 
             setShowError("Incorrect username or password. Please try again.");
         } else {
@@ -102,8 +102,11 @@ function Signup() {
                 type="date"
                 className="form-control"
                 value={credentials.dob}
-                onChange={(e) =>
-                    setCredentials({ ...credentials, dob: e.target.value })
+                onChange={(e) => {
+                    const datePart = e.target.value.split("T")[0];
+                    setCredentials({ ...credentials, dob: datePart })
+                }
+                    
                 }/>
             </div>
         </div>
@@ -119,6 +122,24 @@ function Signup() {
                 onChange={(e) =>
                     setCredentials({ ...credentials, password: e.target.value })
                 }/>
+            </div>
+        </div>
+        <div className="row mb-2">
+            <div className="col">
+                <label>Role:</label>
+            </div>
+            <div className="col">
+                <select
+                className="form-control"
+                value={credentials.role}
+                onChange={(e) =>
+                    setCredentials({ ...credentials, role: e.target.value })
+                }
+                >
+                    <option value="USER">User</option>
+                    <option value="REVIEWER">Reviewer</option>
+                    <option value="ADMIN">Admin</option>
+                </select>
             </div>
         </div>
         <br/>
