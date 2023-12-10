@@ -4,9 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaStar } from "react-icons/fa";
 import WatchlistButton from "../Watchlist";
 
-const Movie = ({ id, title, imageUrl, rating }) => {
+const Movie = ({ id, title, imageUrl, rating, userId }) => {
   let navigate = useNavigate();
-  console.log(rating);
   return (
     <div className="im-movie-tile-style">
       <div>
@@ -15,7 +14,7 @@ const Movie = ({ id, title, imageUrl, rating }) => {
       <div>
         <div className="im-movie-title-section">
           <div className="im-movie-title">{title}</div>
-          <WatchlistButton />
+          <WatchlistButton movieId={id} userId={userId} />
         </div>
 
         <div className="im-movie-title">

@@ -10,13 +10,15 @@ import UserTable from "./components/users/allUsers";
 import UserDeatils from "./components/users/userDetailsPage";
 import Reviews from "./components/users/reviews";
 import SearchPage from './pages/search'
+import Watchlist from "./pages/Watchlist";
+
 function App() {
   return (
     <Router>
       <div className='d-flex flex-column'>
         <TopBar />
       <Routes>
-        <Route path="/"         element={<Home/>}/>
+        <Route path="/home"         element={<Home/>}/>
          <Route path='/search' element={<SearchPage />} />
         <Route path="/signin" element={<Signin />} />
         <Route path="/signup" element={<Signup />} />
@@ -24,6 +26,7 @@ function App() {
         <Route path="/profile" element={<Profile/>} />
         <Route path="/edit" element={<Edit/>} />
         <Route path="/users" element={<UserTable/>} />
+        <Route path="/watchlist" element={<Watchlist/>} />
         <Route path="reviews" element={<Reviews/>}/>
       </Routes>
     </div>

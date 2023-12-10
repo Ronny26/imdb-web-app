@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import {Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import { useAuth } from "../../components/users/authenticateUser";
 import SearchPage from "../search/index";
 import * as client from "./client";
 import Movie from "../../components/Movie/movie";
@@ -10,6 +10,7 @@ const Home = () => {
   const [movies, setMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [ratings, setRatings] = useState({});
+  const { currentUser } = useAuth();
 
   const getMovies = async () => {
     try {
@@ -18,7 +19,7 @@ const Home = () => {
     } catch (error) {
       console.error("Error fetching movies:", error);
     }
-  }
+  };
   const getUpcomingMovies = async () => {
     try {
       const response = await client.getUpcomingTitles();
@@ -53,7 +54,6 @@ const Home = () => {
   }, [movies, upcomingMovies]);
 
   return (
-
     <div className="container">
       <h4>Upcoming Movies</h4>
       <div style={{ display: "flex", flexWrap: "wrap" }}>
@@ -68,6 +68,7 @@ const Home = () => {
                 : "https://www.dotyeti.com/wp-content/uploads/2023/01/barbie.webp"
             }
             rating={ratings[movie.id] || 0}
+            userId={currentUser ? currentUser._id : null}
           />
         ))}
       </div>
@@ -84,6 +85,7 @@ const Home = () => {
                 : "https://www.dotyeti.com/wp-content/uploads/2023/01/barbie.webp"
             }
             rating={ratings[movie.id] || 0}
+            userId={currentUser ? currentUser._id : null}
           />
         ))}
       </div>

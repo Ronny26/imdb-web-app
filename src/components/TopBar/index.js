@@ -50,12 +50,12 @@ const TopBar = () => {
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="active">
-              <Link to="/" style={{backgroundColor: "black"}}>
+              <Link to="/home" style={{backgroundColor: "black"}}>
                 Home <span class="sr-only">(current)</span>
               </Link>
             </li>
             <li>
-              <Link to="/" style={{backgroundColor: "black"}}>Watchlist</Link>
+              <Link to="/watchlist" style={{backgroundColor: "black"}}>Watchlist</Link>
             </li>
             <li>
             <Link to="/search">Search Movies</Link>
