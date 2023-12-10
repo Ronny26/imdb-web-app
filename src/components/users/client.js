@@ -47,10 +47,13 @@ export const findAllUsers = async () => {
   };
 
   export const getUserReviews = async (userId) => {
-    console.log("review user id", userId)
+    console.log("review user id",userId)
     const response = await request.get(`${REVIEWS_API}/user/${userId}`);
     return response.data;
   };
   
   
-  
+  export const account = async () => {
+    const response = await request.post(`${USERS_API}/account`);
+    return response.data;
+  };

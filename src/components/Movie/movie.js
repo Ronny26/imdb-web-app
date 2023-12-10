@@ -1,25 +1,28 @@
 import React from "react";
 import "./index.css";
 import { Link, useNavigate } from "react-router-dom";
+import { FaStar } from "react-icons/fa";
+import WatchlistButton from "../Watchlist";
 
-const Movie = ({ id, title, imageUrl, rating }) => {
+const Movie = ({ id, title, imageUrl, rating, userId }) => {
+  console.log(imageUrl, "image url")
   let navigate = useNavigate();
-  console.log(rating)
   return (
-    <div className="card im-movie-tile-style">
+    <div className="im-movie-tile-style">
       <div>
         <img className="im-movie-poster mb-2" src={imageUrl} alt={title} />
-        <div className="im-movie-title">{title}</div>
       </div>
-      <button
-        type="button"
-        className="btn btn-outline-success"
-        onClick={() => {
-          navigate(`/${id}`);
-        }}
-      >
-        Add to watchlist
-      </button>
+      <div>
+        <div className="im-movie-title-section">
+          <div className="im-movie-title">{title}</div>
+          <WatchlistButton movieTitle={title} userId={userId} />
+        </div>
+
+        <div className="im-movie-title">
+          <FaStar className="im-star" />
+          {rating}
+        </div>
+      </div>
     </div>
   );
 };

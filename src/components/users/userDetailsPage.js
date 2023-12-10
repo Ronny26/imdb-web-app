@@ -3,8 +3,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { NavLink } from "react-router-dom";
 import { Link, useLocation } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useAuth } from "../users/authenticateUser";
 
 function UserDeatils() {
+    const { currentUser } = useAuth();
+
     const location = useLocation();
     const [activeTab, setActiveTab] = useState("profile");
 
@@ -16,17 +19,17 @@ function UserDeatils() {
       }, [location.pathname]);
     return (
         <div>
-      <ul className="nav nav-tabs">
+      <ul className="nav nav-tabs" style={{width: 1500}}>
         <li className={`nav-item ${activeTab === "profile" ? "active" : ""}`}>
           <Link to="/profile" className="nav-link">
             Profile
           </Link>
         </li>
-        <li className={`nav-item ${activeTab === "reviews" ? "active" : ""}`}>
+        {currentUser && currentUser.role != "ADMIN" &&( <li className={`nav-item ${activeTab === "reviews" ? "active" : ""}`}>
           <Link to="/reviews" className="nav-link">
             Reviews
           </Link>
-        </li>
+        </li>)}
         <li className={`nav-item ${activeTab === "other" ? "active" : ""}`}>
           <Link to="/other" className="nav-link">
             Other
