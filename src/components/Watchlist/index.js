@@ -1,17 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CiBookmark } from "react-icons/ci";
 import "./index.css";
 import * as client from "./client";
 
-const WatchlistButton = ({movieId, userId}) => {
+const WatchlistButton = ({movieTitle, userId}) => {
   const [clicked, setClicked] = useState(false);
 
-  const addToWatchlist = () => {
+  useEffect(() => {
+    const checkWatchlist = async () => {
+      try {
+        const watchlist = await client.getWatchlist(userId);
+        const isWatchlisted = watchlist.some((item) => item.movieTitle === movieTitle);
+        setClicked(isWatchlisted);
+        console.log("set clciked", isWatchlisted);
+      } catch (error) {
+        console.error("Error checking watchlist:", error);
+      }
+    };
+
+    checkWatchlist();
+  }, [movieTitle, userId]);
+
+  const addToWatchlist = async() => {
     if (userId == null) {
       console.log("Please log in");
     } else {
-        setClicked(!clicked)
-        client.createWatchlist({userId: userId, movieId: movieId})
+        
+        console.log("in watchlist")
+        try{
+          const movieResponse = await client.getMovieTitle(movieTitle);
+          await client.createWatchlist({userId: userId, movieId: movieResponse.movieId})
+          setClicked(!clicked)
+        } catch{
+
+        }
+        
     }
   };
 

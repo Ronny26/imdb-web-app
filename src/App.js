@@ -18,6 +18,7 @@ function App() {
       <div className='d-flex flex-column'>
         <TopBar />
       <Routes>
+      <Route path="/"         element={<Home/>}/>
         <Route path="/home"         element={<Home/>}/>
          <Route path='/search' element={<SearchPage />} />
         <Route path="/signin" element={<Signin />} />

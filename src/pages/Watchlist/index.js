@@ -5,51 +5,52 @@ import { useAuth } from "../../components/users/authenticateUser";
 
 
 const Watchlist = () => {
-    const [watchlistedMovieIds, setWatchlistedMovieIds] = useState([]);
     const [watchlistedMovies, setWatchlistedMovies] = useState([]);
     const { currentUser } = useAuth();
 
-    const getWatchlistedMovies = async () => {
+    useEffect(() => {
+      const getWatchlistedMovies = async () => {
         try {
-          const response = await client.getWatchlist(currentUser);
-          console.log(response.data);
-          setWatchlistedMovieIds(response.data);
+          console.log("current user", currentUser);
+          console.log("watchlist page");
+          const response = await client.getWatchlist(currentUser._id);
+          console.log("Watchlist response:", response);
+          const watchlistMovies = response.map((watchlistItem) => watchlistItem.movie);
+
+          setWatchlistedMovies(watchlistMovies);
         } catch (error) {
           console.error("Error fetching movies:", error);
         }
       };
+      if (currentUser) {
+        getWatchlistedMovies();
+      }
+    }, [currentUser]);
       
 
-    //   const getWatchlistByID = async () => {
-    //     try {
-    //       const response = await client.getWatchlist();
-    //       setWatchlistedMovieIds(response);
-    //     } catch (error) {
-    //       console.error("Error fetching movies:", error);
-    //     }
-    //   };
-      useEffect(() => {
-        getWatchlistedMovies();
-      }, []);
+   
+    useEffect(() => {
+      console.log("watchlistedmovies", watchlistedMovies);
+    }, [watchlistedMovies]);
+  
 
   return (
     <div className="container">
-      {/* <div style={{ display: "flex", flexWrap: "wrap" }}>
+      { <div style={{ display: "flex", flexWrap: "wrap" }}>
         {watchlistedMovies.map((movie) => (
           <Movie
             key={movie.id}
             id={movie.id}
-            title={movie.titleText.text}
+            title={movie.title}
             imageUrl={
               movie.primaryImage
                 ? movie.primaryImage.url
                 : "https://www.dotyeti.com/wp-content/uploads/2023/01/barbie.webp"
             }
-            rating={ratings[movie.id] || 0}
             userId={currentUser ? currentUser._id : null}
           />
         ))}
-      </div> */}
+      </div> }
     </div>
   );
 };

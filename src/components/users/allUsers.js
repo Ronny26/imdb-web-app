@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '@fortawesome/fontawesome-free/css/all.min.css'
 import * as client from "./client";
 import { BsFillCheckCircleFill, BsPencil, BsPlusCircleFill, BsTrash3Fill}   from "react-icons/bs";
 import TopBar from "../TopBar";

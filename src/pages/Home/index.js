@@ -15,6 +15,7 @@ const Home = () => {
   const getMovies = async () => {
     try {
       const response = await client.getTitles();
+      console.log(response);
       setMovies(response);
     } catch (error) {
       console.error("Error fetching movies:", error);

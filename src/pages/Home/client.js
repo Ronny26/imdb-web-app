@@ -25,11 +25,17 @@ export const getUpcomingTitles = async () => {
 };
 
 export const getRating = async (id) => {
-  const response = await axios.get(`${TITLES_API}/${id}/ratings`, headers);
-  return response.data.results.averageRating;
+  try{
+    const response = await axios.get(`${TITLES_API}/${id}/ratings`, headers);
+    return response.data.results.averageRating;
+  } catch(error) {
+    return 5;
+  }
+  
 };
 
 export const createWatchlist = async (watchlist) => {
+  console.log(watchlist, "watchlist")
   const response = await axios.post(`${WATCHLIST_API}`, watchlist);
   return response.data;
 };

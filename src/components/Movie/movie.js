@@ -14,7 +14,7 @@ const Movie = ({ id, title, imageUrl, rating, userId }) => {
       <div>
         <div className="im-movie-title-section">
           <div className="im-movie-title">{title}</div>
-          <WatchlistButton movieId={id} userId={userId} />
+          <WatchlistButton movieTitle={title} userId={userId} />
         </div>
 
         <div className="im-movie-title">
