@@ -55,7 +55,8 @@ const TopBar = () => {
               </Link>
             </li>
             <li>
-              <Link to="/watchlist" style={{backgroundColor: "black"}}>Watchlist</Link>
+              {
+                currentUser ? <Link to="/watchlist" style={{backgroundColor: "black"}}>Watchlist</Link> : <></>}
             </li>
             <li>
             <Link to="/search">Search Movies</Link>

@@ -43,10 +43,11 @@ const Watchlist = () => {
             id={movie.id}
             title={movie.title}
             imageUrl={
-              movie.primaryImage
-                ? movie.primaryImage.url
+              movie.primary_image
+                ? movie.primary_image.url
                 : "https://www.dotyeti.com/wp-content/uploads/2023/01/barbie.webp"
             }
+            rating={movie.rating}
             userId={currentUser ? currentUser._id : null}
           />
         ))}

@@ -24,6 +24,7 @@ const Home = () => {
   const getUpcomingMovies = async () => {
     try {
       const response = await client.getUpcomingTitles();
+      console.log(response);
       setUpcomingMovies(response);
     } catch (error) {
       console.error("Error fetching upcoming movies:", error);
