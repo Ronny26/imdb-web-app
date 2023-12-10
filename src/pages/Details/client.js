@@ -10,9 +10,10 @@ const headers = {
   }
 }
 
-export const getTitles = async (genre, type) => {
+export const getTitles = async id => {
   try {
-    const url = `${TITLES_API}/?titleType=${type}&genre=${genre}&limit=30`
+    const url = `${TITLES_API}/${id}`
+    console.log(id)
     const response = await axios.get(url, headers)
     console.log(response)
     return response.data.results

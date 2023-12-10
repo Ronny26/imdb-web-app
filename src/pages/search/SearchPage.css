@@ -73,4 +73,45 @@
     font-size: 14px;
     color: #999;
   }
+  .form-select {
+    padding: 10px 15px;
+    font-size: 1rem;
+    border: 2px solid #ced4da;
+    border-radius: 0.25rem;
+    background-color: white;
+    background-clip: padding-box;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+   
+  }
   
+  .form-select:focus {
+    border-color: #086cd6;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+  
+  /* You can add this if you want to remove the default arrow icon */
+  .form-select::-ms-expand {
+    display: none;
+  }
+  
+  
+  /* Style focus state with a more subtle browser-independent outline */
+  .form-select:focus {
+    border: 2px solid #0e7bd3;
+    outline: 0;
+  }
+  
+  /* Optional: Add a slight background gradient for a bit of gloss */
+  .form-select {
+    background-image: linear-gradient(to bottom, #26ed10, #1579de);
+  }
+  .form { 
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+  }
+  .movie-image{
+    width: 	180px;
+    height: 256px;
+  }
