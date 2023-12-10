@@ -59,7 +59,7 @@ const TopBar = () => {
                 currentUser ? <Link to="/watchlist" style={{backgroundColor: "black"}}>Watchlist</Link> : <></>}
             </li>
             <li>
-            <Link to="/search">Search Movies</Link>
+            <Link to="/search"  style={{backgroundColor: "black"}}>Search Movies</Link>
             </li>
           </ul>
           <ul class="nav navbar-nav navbar-right list-group">
@@ -71,7 +71,7 @@ const TopBar = () => {
                     class="form-control"
                     placeholder="Search"
                   />
-                  <Link to={currentUser ? "/profile" : "/signin"} onClick={handleUserIconClick} className="im-icon">
+                  <Link to={currentUser ? "/profile" : "/signin"} onClick={handleUserIconClick} style={{marginTop:20}} className="im-icon">
                      <VscAccount/>
                   </Link>
                 </div>
@@ -80,7 +80,7 @@ const TopBar = () => {
             {currentUser && (
               <li>
                 {}
-                <button onClick={handleSignout} className="btn btn-link">
+                <button onClick={handleSignout} className="btn btn-link" style={{marginTop: 10}}>
                   Sign Out
                 </button>
               </li>

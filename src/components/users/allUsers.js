@@ -15,14 +15,7 @@ function UserTable() {
   };
   useEffect(() => { fetchUsers(); }, []);
   const [user, setUser] = useState({ username: "", password: "", role: "USER", firstName: "", lastName: ""});
-  const createUser = async () => {
-    try {
-      const newUser = await client.createUser(user);
-      setUsers([newUser, ...users]);
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  
 
   const deleteUser = async (user) => {
     try {
@@ -90,7 +83,7 @@ function UserTable() {
           {users.map((user) => (
             <tr key={user._id}>
               <td>
-              <Link to={`/kanbas/account/${user._id}`}>{user.username}</Link>
+              <Link to={`/account/${user._id}`}>{user.username}</Link>
               </td>
               <td>{user.firstName}</td>
               <td>{user.lastName}</td>

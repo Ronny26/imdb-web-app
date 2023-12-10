@@ -11,7 +11,7 @@ import UserDeatils from "./components/users/userDetailsPage";
 import Reviews from "./components/users/reviews";
 import SearchPage from './pages/search'
 import Watchlist from "./pages/Watchlist";
-
+import Account from "./components/users/otherUsersProfile";
 function App() {
   return (
     <Router>
@@ -29,6 +29,7 @@ function App() {
         <Route path="/users" element={<UserTable/>} />
         <Route path="/watchlist" element={<Watchlist/>} />
         <Route path="reviews" element={<Reviews/>}/>
+        <Route path="/account/:userId?" element={<Account/>} />
       </Routes>
     </div>
     </Router>

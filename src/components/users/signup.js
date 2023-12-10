@@ -5,12 +5,13 @@ function Signup() {
     const [credentials, setCredentials] = useState({
         username: "", password: "" });
     const [showError, setShowError] = useState(false);
+  const [showSuccess, setShowSuccess] = useState(false);
     const navigate = useNavigate();
 
   const handleSignup = async () => {
     try{
         await client.signup(credentials);
-        navigate("/");
+        setShowSuccess(true);
     }
     catch (error) {
         console.log("error", error)
@@ -21,6 +22,11 @@ function Signup() {
             setShowError("Sign-in failed. Please try again later.");
         }
     }
+  };
+
+  const handleCloseSuccess = () => {
+    setShowSuccess(false);
+    navigate("/signin"); 
   };
 
   const handleCloseError = () => {
@@ -124,24 +130,7 @@ function Signup() {
                 }/>
             </div>
         </div>
-        <div className="row mb-2">
-            <div className="col">
-                <label>Role:</label>
-            </div>
-            <div className="col">
-                <select
-                className="form-control"
-                value={credentials.role}
-                onChange={(e) =>
-                    setCredentials({ ...credentials, role: e.target.value })
-                }
-                >
-                    <option value="USER">User</option>
-                    <option value="REVIEWER">Reviewer</option>
-                    <option value="ADMIN">Admin</option>
-                </select>
-            </div>
-        </div>
+        
         <br/>
         <button onClick={handleSignup} className="btn btn-signin-color mt-3">
           Sign Up
@@ -153,6 +142,15 @@ function Signup() {
             <div className="error-content">
               <p>Sign-up failed. Username already taken.</p>
               <button onClick={handleCloseError}>OK</button>
+            </div>
+          </div>
+        )}
+    
+    {showSuccess && (
+          <div className="success-modal">
+            <div className="success-content">
+              <p>Account created successfully. Please login.</p>
+              <button onClick={handleCloseSuccess}>OK</button>
             </div>
           </div>
         )}
