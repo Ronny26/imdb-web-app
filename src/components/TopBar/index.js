@@ -59,10 +59,7 @@ const TopBar = () => {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>
-          <Link class="navbar-brand" to="/" style={{backgroundColor: "black"}}>
-            IMDB
-          </Link>
+          
         </div>
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -80,29 +77,7 @@ const TopBar = () => {
             <Link to="/search"  style={{backgroundColor: "black"}}>Search Movies</Link>
             </li>
           </ul>
-          <ul class="nav navbar-nav navbar-right list-group">
-            <li>
-              <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search"
-                  />
-                  <Link to={currentUser ? "/profile" : "/signin"} onClick={handleUserIconClick} style={{marginTop:20}} className="im-icon">
-                     <VscAccount/>
-                  </Link>
-                </div>
-              </form>
-            </li>
-            {currentUser && (
-              <li>
-                {}
-                <button onClick={handleSignout} className="btn btn-link" style={{marginTop: 10}}>
-                  Sign Out
-                </button>
-              </li>
-            </ul>
+          
             <ul class='nav navbar-nav navbar-right list-group'>
               <li>
                 <form class='navbar-form navbar-left' role='search'>
