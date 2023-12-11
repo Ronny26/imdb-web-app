@@ -1,43 +1,44 @@
-import './App.css'
-import TopBar from './components/TopBar'
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import Signin from './components/users/signin'
-import Signup from './components/users/signup'
-import Profile from './components/users/profile'
-import Edit from './components/users/edit'
-import Home from './pages/Home'
-import UserTable from './components/users/allUsers'
-import UserDeatils from './components/users/userDetailsPage'
-import Reviews from './components/users/reviews'
-import SearchPage from './pages/search'
+import "./App.css";
+import TopBar from "./components/TopBar";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Signin from "./components/users/signin";
+import Signup from "./components/users/signup";
+import Profile from "./components/users/profile";
+import Edit from "./components/users/edit";
+import Home from "./pages/Home";
+import UserTable from "./components/users/allUsers";
+import UserDeatils from "./components/users/userDetailsPage";
+import Reviews from "./components/users/reviews";
+import SearchPage from "./pages/search";
 import Watchlist from "./pages/Watchlist";
 import Account from "./components/users/otherUsersProfile";
-import MovieInfoComponent from './pages/Details'
-function App () {
-
+import MovieInfoComponent from "./pages/Details";
+import AddMovie from "./pages/AddMovie";
+function App() {
   return (
     <Router>
-      <div className='d-flex flex-column'>
+      <div className="d-flex flex-column">
         <TopBar />
 
         <Routes>
-          <Route path='/' element={<Home />} />
-             <Route path="/home"         element={<Home/>}/>
-          <Route path='/search' element={<SearchPage />} />
-          <Route path='/detail/:movieId' element={<MovieInfoComponent />} />
-          <Route path='/signin' element={<Signin />} />
-          <Route path='/signup' element={<Signup />} />
-          <Route path='/UserDeatils' element={<UserDeatils />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/edit' element={<Edit />} />
-          <Route path='/users' element={<UserTable />} />
-                  <Route path="/watchlist" element={<Watchlist/>} />
-          <Route path='reviews' element={<Reviews />} />
-              <Route path="/account/:userId?" element={<Account/>} />
+          <Route path="/" element={<Home />} />
+          <Route path="/home" element={<Home />} />
+          <Route path="/search" element={<SearchPage />} />
+          <Route path="/detail/:movieId" element={<MovieInfoComponent />} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/UserDeatils" element={<UserDeatils />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/edit" element={<Edit />} />
+          <Route path="/users" element={<UserTable />} />
+          <Route path="/watchlist" element={<Watchlist />} />
+          <Route path="/addMovie" element={<AddMovie />} />
+          <Route path="reviews" element={<Reviews />} />
+          <Route path="/account/:userId?" element={<Account />} />
         </Routes>
       </div>
     </Router>
-  )
+  );
 }
 
-export default App
+export default App;
