@@ -49,3 +49,7 @@
 .btn-danger.btn-outline:hover {
     color: #fff;
 } */
+
+.movie-info {
+  text-align: center; /* Center aligns text for all elements */
+}

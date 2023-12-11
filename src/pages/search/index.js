@@ -90,7 +90,7 @@ const SearchPage = () => {
               <button>
                 <Link to={`/detail/${movie.id}`} key={movie.id}>
                   {' '}
-                  here
+                  Details
                 </Link>
               </button>
               <p>

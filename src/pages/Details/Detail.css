@@ -82,6 +82,6 @@
   .movie-poster {
     height: 100%;
     object-fit: cover;
-    /* You'll need to set a fixed height for .movie-detail to make this work */
+    
   }
   
