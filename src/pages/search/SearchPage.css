@@ -1,4 +1,4 @@
-/* SearchPage.css */
+
 .search-page {
     font-family: 'Arial', sans-serif;
   }
@@ -90,19 +90,19 @@
     box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
   }
   
-  /* You can add this if you want to remove the default arrow icon */
+  
   .form-select::-ms-expand {
     display: none;
   }
   
   
-  /* Style focus state with a more subtle browser-independent outline */
+
   .form-select:focus {
     border: 2px solid #0e7bd3;
     outline: 0;
   }
   
-  /* Optional: Add a slight background gradient for a bit of gloss */
+
   .form-select {
     background-image: linear-gradient(to bottom, #26ed10, #1579de);
   }
@@ -114,4 +114,7 @@
   .movie-image{
     width: 	180px;
     height: 256px;
+  }
+  .movie-info {
+    text-align: center; /* Center aligns text for all elements */
   }
