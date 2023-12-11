@@ -10,11 +10,11 @@ import UserTable from './components/users/allUsers'
 import UserDeatils from './components/users/userDetailsPage'
 import Reviews from './components/users/reviews'
 import SearchPage from './pages/search'
-import Watchlist from "./pages/Watchlist";
-import Account from "./components/users/otherUsersProfile";
+import Watchlist from './pages/Watchlist'
+import Account from './components/users/otherUsersProfile'
 import MovieInfoComponent from './pages/Details'
+import Search from './pages/SearchMovie'
 function App () {
-
   return (
     <Router>
       <div className='d-flex flex-column'>
@@ -22,8 +22,9 @@ function App () {
 
         <Routes>
           <Route path='/' element={<Home />} />
-             <Route path="/home"         element={<Home/>}/>
+          <Route path='/home' element={<Home />} />
           <Route path='/search' element={<SearchPage />} />
+          <Route path='/searchmovie' element={<Search />} />
           <Route path='/detail/:movieId' element={<MovieInfoComponent />} />
           <Route path='/signin' element={<Signin />} />
           <Route path='/signup' element={<Signup />} />
@@ -31,9 +32,9 @@ function App () {
           <Route path='/profile' element={<Profile />} />
           <Route path='/edit' element={<Edit />} />
           <Route path='/users' element={<UserTable />} />
-                  <Route path="/watchlist" element={<Watchlist/>} />
+          <Route path='/watchlist' element={<Watchlist />} />
           <Route path='reviews' element={<Reviews />} />
-              <Route path="/account/:userId?" element={<Account/>} />
+          <Route path='/account/:userId?' element={<Account />} />
         </Routes>
       </div>
     </Router>

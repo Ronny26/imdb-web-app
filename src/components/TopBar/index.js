@@ -1,8 +1,10 @@
 import React from 'react'
 import { VscAccount } from 'react-icons/vsc'
+import { VscSearch } from 'react-icons/vsc'
 import { Link, useNavigate } from 'react-router-dom'
 import './index.css'
 import useAuth from '../users/authenticateUser.js'
+
 const TopBar = () => {
   const navigate = useNavigate()
   const { currentUser, signout } = useAuth()
@@ -54,64 +56,53 @@ const TopBar = () => {
             class='collapse navbar-collapse'
             id='bs-example-navbar-collapse-1'
           >
+            <span class='sr-only'>Toggle navigation</span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+            <span class='icon-bar'></span>
+          </div>
 
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <Link class="navbar-brand" to="/" style={{backgroundColor: "black"}}>
-            IMDB
-          </Link>
-        </div>
-
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav">
-            <li class="active">
-              <Link to="/home" style={{backgroundColor: "black"}}>
-                Home <span class="sr-only">(current)</span>
-              </Link>
-            </li>
-            <li>
-              {
-                currentUser ? <Link to="/watchlist" style={{backgroundColor: "black"}}>Watchlist</Link> : <></>}
-            </li>
-            <li>
-            <Link to="/search"  style={{backgroundColor: "black"}}>Search Movies</Link>
-            </li>
-          </ul>
-          <ul class="nav navbar-nav navbar-right list-group">
-            <li>
-              <form class="navbar-form navbar-left" role="search">
-                <div class="form-group">
-                  <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search"
-                  />
-                  <Link to={currentUser ? "/profile" : "/signin"} onClick={handleUserIconClick} style={{marginTop:20}} className="im-icon">
-                     <VscAccount/>
-                  </Link>
-                </div>
-              </form>
-            </li>
-            {currentUser && (
-              <li>
-                {}
-                <button onClick={handleSignout} className="btn btn-link" style={{marginTop: 10}}>
-                  Sign Out
-                </button>
+          <div
+            class='collapse navbar-collapse'
+            id='bs-example-navbar-collapse-1'
+          >
+            <ul class='nav navbar-nav'>
+              <li class='active'>
+                <Link to='/home' style={{ backgroundColor: 'black' }}>
+                  Home <span class='sr-only'>(current)</span>
+                </Link>
               </li>
+              <li>
+                {currentUser ? (
+                  <Link to='/watchlist' style={{ backgroundColor: 'black' }}>
+                    Watchlist
+                  </Link>
+                ) : (
+                  <></>
+                )}
+              </li>
+              <li>
+                <Link to='/search' style={{ backgroundColor: 'black' }}>
+                  Search Movies
+                </Link>
+              </li>
+              {currentUser && currentUser.role === 'ADMIN' && (
+                <li>
+                  <Link to='/addMovie' style={{ backgroundColor: 'black' }}>
+                    Add Movie
+                  </Link>
+                </li>
+              )}
             </ul>
+
             <ul class='nav navbar-nav navbar-right list-group'>
               <li>
                 <form class='navbar-form navbar-left' role='search'>
                   <div class='form-group'>
-                    <input
-                      type='text'
-                      class='form-control'
-                      placeholder='Search'
-                    />
+                    <Link to={`/searchmovie`} className='im-icon'>
+                      <VscSearch />
+                    </Link>
+
                     <Link
                       to={currentUser ? '/profile' : '/signin'}
                       onClick={handleUserIconClick}
@@ -139,4 +130,3 @@ const TopBar = () => {
 }
 
 export default TopBar
-
