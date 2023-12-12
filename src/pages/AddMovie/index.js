@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./index.css";
 import * as client from "./client";
+import {  useNavigate } from "react-router-dom";
 
-const AddMovie = () => {
+const AddMovie = ({ adminMovies, setAdminMovies }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     rating: "",
@@ -10,6 +12,7 @@ const AddMovie = () => {
     description: "",
     primary_image: { url: "" },
   });
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -32,6 +35,7 @@ const AddMovie = () => {
     };
     const titles = movieData;
     e.preventDefault();
+    setAdminMovies((prevAdminMovies) => [...prevAdminMovies, movieData]);
     try {
       await client.createMovie(titles);
     } catch (error) {
@@ -79,7 +83,6 @@ const AddMovie = () => {
               value={formData.actors}
               onChange={handleChange}
               className="form-control"
-              required
             />
           </label>
         </div>
@@ -91,7 +94,6 @@ const AddMovie = () => {
               value={formData.description}
               onChange={handleChange}
               className="form-control"
-              required
             />
           </label>
         </div>
@@ -104,7 +106,6 @@ const AddMovie = () => {
               value={formData.primary_image ? formData.primary_image.url : ""}
               onChange={handleChange}
               className="form-control"
-              required
             />
           </label>
         </div>

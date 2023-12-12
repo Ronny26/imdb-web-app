@@ -72,8 +72,9 @@ const TopBar = () => {
                   Home <span class='sr-only'>(current)</span>
                 </Link>
               </li>
+              
               <li>
-                {currentUser ? (
+                {currentUser && currentUser.role != 'ADMIN' ? (
                   <Link to='/watchlist' style={{ backgroundColor: 'black' }}>
                     Watchlist
                   </Link>
