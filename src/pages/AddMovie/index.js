@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import "./index.css";
 import * as client from "./client";
+import {  useNavigate } from "react-router-dom";
 
 const AddMovie = ({ adminMovies, setAdminMovies }) => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     title: "",
     rating: "",
