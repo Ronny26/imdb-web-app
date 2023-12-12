@@ -32,7 +32,7 @@ function UserDeatils() {
         </li>)}
         <li className={`nav-item ${activeTab === "other" ? "active" : ""}`}>
           <Link to="/other" className="nav-link">
-            Other
+            Following
           </Link>
         </li>
       </ul>
