@@ -6,7 +6,8 @@ import * as client from './client'
 import Movie from '../../components/Movie/movie'
 import './index.css'
 
-const Home = () => {
+const Home = ({adminMovies}) => {
+  console.log("admin movies", adminMovies);
   const [movies, setMovies] = useState([])
   const [upcomingMovies, setUpcomingMovies] = useState([])
   const [ratings, setRatings] = useState({})
@@ -87,6 +88,23 @@ const Home = () => {
                 : 'https://www.dotyeti.com/wp-content/uploads/2023/01/barbie.webp'
             }
             rating={ratings[movie.id] || 0}
+            userId={currentUser ? currentUser._id : null}
+          />
+        ))}
+      </div>
+      <h4>Other movies</h4>
+      <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+        {adminMovies.map(movie => (
+          <Movie
+            key={movie.id}
+            id={movie.id}
+            title={movie.title}
+            imageUrl={
+              movie.primaryImage
+                ? movie.primaryImage.url
+                : 'https://www.dotyeti.com/wp-content/uploads/2023/01/barbie.webp'
+            }
+            rating={ratings[movie.rating] || 0}
             userId={currentUser ? currentUser._id : null}
           />
         ))}

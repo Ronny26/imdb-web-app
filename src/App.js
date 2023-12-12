@@ -1,6 +1,8 @@
 import "./App.css";
+import React from "react";
 import TopBar from "./components/TopBar";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
 import Signin from "./components/users/signin";
 import Signup from "./components/users/signup";
 import Profile from "./components/users/profile";
@@ -17,6 +19,7 @@ import MovieInfoComponent from "./pages/Details";
 import AddMovie from "./pages/AddMovie";
 function App() {
 
+  const [adminMovies, setAdminMovies] = React.useState([]);
   return (
     <Router>
       <div className="d-flex flex-column">
@@ -24,8 +27,8 @@ function App() {
 
         <Routes>
 
-          <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
+        <Route path="/" element={<Home adminMovies={adminMovies} />} />
+        <Route path="/home" element={<Home adminMovies={adminMovies} />} />
           <Route path="/search" element={<SearchPage />} />
           <Route path='/searchmovie' element={<Search />} />
           <Route path="/detail/:movieId" element={<MovieInfoComponent />} />
@@ -36,7 +39,7 @@ function App() {
           <Route path="/edit" element={<Edit />} />
           <Route path="/users" element={<UserTable />} />
           <Route path="/watchlist" element={<Watchlist />} />
-          <Route path="/addMovie" element={<AddMovie />} />
+          <Route path="/addMovie" element={<AddMovie adminMovies={adminMovies} setAdminMovies={setAdminMovies} />} />
           <Route path="reviews" element={<Reviews />} />
           <Route path="/account/:userId?" element={<Account />} />
 
