@@ -1,9 +1,11 @@
+
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import * as client from "./client";
 import "./Detail.css";
 import useAuth from "../../components/users/authenticateUser";
+import PopularMovies from '../../components/Movie/popular'
 
 const MovieDetails = () => {
   const [userReviews, setUserReviews] = useState([]);
@@ -110,6 +112,7 @@ const MovieDetails = () => {
   }
 
   return (
+
     <div className="container mt-5">
       <div className="row">
         <div className="col-md-4">

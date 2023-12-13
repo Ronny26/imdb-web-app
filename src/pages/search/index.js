@@ -3,6 +3,7 @@ import * as client from './client'
 import './SearchPage.css'
 import MovieInfoComponent from '../Details/index'
 import { Link } from 'react-router-dom'
+import PopularMovies from '../../components/Movie/popular'
 const SearchPage = () => {
   const [movies, setMovies] = useState([])
   const [genre, setGenre] = useState('Comedy')
