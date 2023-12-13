@@ -11,6 +11,44 @@ const MovieDetails = () => {
   const [showUserReviews, setShowUserReviews] = useState(false);
   const [showCriticReviews, setShowCriticReviews] = useState(false);
   const { movieId } = useParams();
+  const [userRating, setUserRating] = useState(0);
+  const [userFeedback, setUserFeedback] = useState("");
+  const [blogLink, setBlogLink] = useState("");
+  const { currentUser } = useAuth();
+
+  const createReview = async(e) => {
+    e.preventDefault();
+    const newUserReview = {
+      userId: currentUser ? currentUser._id : null,
+      movieId: movieId,
+      rating: userRating,
+      comment: userFeedback,
+    };
+    console.log(newUserReview)
+    try {
+      const response = await client.createReview(newUserReview);
+      console.log(response);
+      setUserReviews([...userReviews, newUserReview]);
+      setUserRating(0);
+      setUserFeedback("");
+    } catch (error) {
+      console.error("Error fetching movie:", error);
+    }
+  };
+
+  // const createBlogLink = (e) => {
+  //   e.preventDefault();
+  //   const newUserReview = {
+  //     userId: currentUser ? currentUser._id : null,
+  //     movieId: movieId,
+  //     rating: userRating,
+  //     feedback: userFeedback,
+  //   };
+  //   setUserReviews([...userReviews, newUserReview]);
+  //   createReview(newUserReview)
+  //   setUserRating(0);
+  //   setUserFeedback("");
+  // };
 
   const [movieData, setMovieData] = useState({
     title: "The Color Purple",
@@ -36,56 +74,40 @@ const MovieDetails = () => {
     try {
       const response = await client.getUserReviews(movieId);
       console.log(response);
-      setUserReviews(response);
+
+      const usersPromises = response.map(async (review) => {
+        try {
+          const userResponse = await client.findUserById(review.userId);
+          return {
+            ...review,
+            username: userResponse.username,
+          };
+        } catch (error) {
+          console.error("Error fetching user details:", error);
+          return review;
+        }
+      });
+
+      const usersWithDetails = await Promise.all(usersPromises);
+      setUserReviews(usersWithDetails);
     } catch (error) {
-      console.error("Error fetching movie:", error);
+      console.error("Error fetching user reviews:", error);
     }
   };
 
   useEffect(() => {
     getMovies(movieId);
     getUserReviews(movieId);
-  }, []);
-
-  const userReviewsData = [
-    { username: "User1", rating: 8, feedback: "Great movie!" },
-    { username: "User2", rating: 7, feedback: "Enjoyed it, but..." },
-  ];
-
-  const criticReviewsData = [
-    { criticName: "Critic1", rating: 9, feedback: "A masterpiece!" },
-    { criticName: "Critic2", rating: 8, feedback: "Solid performances..." },
-  ];
+  }, [movieId]);
 
   const handleShowUserReviews = () => {
     setShowUserReviews(true);
     setShowCriticReviews(false);
   };
 
-  const handleShowCriticReviews = () => {
-    setShowCriticReviews(true);
-    setShowUserReviews(false);
-  };
-
   if (!movieData) {
     return <div>Loading...</div>;
   }
-  // Uncomment and set up state based on your needs
-  // const [userRating, setUserRating] = useState(0);
-  // const [userFeedback, setUserFeedback] = useState('');
-
-  // const handleUserSubmit = (e) => {
-  //   e.preventDefault();
-  //   const newUserReview = {
-  //     username: "New User",
-  //     rating: userRating,
-  //     feedback: userFeedback,
-  //   };
-  //   setUserReviews([...userReviews, newUserReview]);
-  //   // You may want to send this data to a server or update it in your state management
-  //   setUserRating(0);
-  //   setUserFeedback('');
-  // };
 
   return (
     <div className="container mt-5">
@@ -103,43 +125,62 @@ const MovieDetails = () => {
           <p>Description: {movieData.description}</p>
           <p>Rating: {movieData.rating}</p>
           <button className="btn btn-primary" onClick={handleShowUserReviews}>
-            Show User Reviews
+            Show Reviews
           </button>
-          <button
+          {/* <button
             className="btn btn-primary im-button"
             onClick={handleShowCriticReviews}
           >
             Show Critic Reviews
-          </button>
-          <h3>Add Your Review</h3>
-          <div className="col-xs-3">
-            <label htmlFor="userRating">Rating (out of 10):</label>
-            <input
-              type="number"
-              className="form-control"
-              id="userRating"
-              min="0"
-              max="10"
-              // value={userRating}
-              // onChange={(e) => setUserRating(e.target.value)}
-            />
-          </div>
-          <div className="col-xs-6">
-            <label htmlFor="userFeedback">Feedback:</label>
-            <textarea
-              className="form-control"
-              id="userFeedback"
-              rows="3"
-              // value={userFeedback}
-              // onChange={(e) => setUserFeedback(e.target.value)}
-            ></textarea>
-          </div>
-          <div className="mt-3">
-            {/* Uncomment the onSubmit event handler when ready to implement */}
-            <button type="submit" className="btn btn-primary">
-              Submit Review
-            </button>
-          </div>
+          </button> */}
+          {currentUser && (
+            <div>
+              <h3>Add Your Review</h3>
+              <div className="col-xs-3">
+                <label htmlFor="userRating">Rating (out of 10):</label>
+                <input
+                  type="number"
+                  className="form-control"
+                  id="userRating"
+                  min="0"
+                  max="10"
+                  value={userRating}
+                  onChange={(e) => setUserRating(e.target.value)}
+                />
+              </div>
+              <div className="col-xs-6">
+                <label htmlFor="userFeedback">Feedback:</label>
+                <textarea
+                  className="form-control"
+                  id="userFeedback"
+                  rows="3"
+                  value={userFeedback}
+                  onChange={(e) => setUserFeedback(e.target.value)}
+                ></textarea>
+              </div>
+              {currentUser.role == 'ADMIN' && (
+              <div className="col-xs-6">
+              <label htmlFor="blogLink">Your blog:</label>
+              <input
+                  type="String"
+                  className="form-control"
+                  id="blogLink"
+                  value={blogLink}
+                  onChange={(e) => setBlogLink(e.target.value)}
+                />
+            </div>
+              )}
+              <div className="mt-3">
+                <button
+                  type="submit"
+                  className="btn btn-primary"
+                  onClick={createReview}
+                >
+                  Submit Review
+                </button>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -149,24 +190,9 @@ const MovieDetails = () => {
           <ul className="list-group">
             {userReviews.map((review, index) => (
               <li key={index} className="list-group-item">
-                <p>{review.username}</p>
+                <h3>{review.username}</h3>
                 <p>Rating: {review.rating}</p>
                 <p>{review.comment}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      )}
-
-      {showCriticReviews && (
-        <div className="mt-4">
-          <h2>Critic Reviews</h2>
-          <ul className="list-group">
-            {criticReviewsData.map((review, index) => (
-              <li key={index} className="list-group-item">
-                <p>{review.criticName}</p>
-                <p>Rating: {review.rating}</p>
-                <p>{review.feedback}</p>
               </li>
             ))}
           </ul>
