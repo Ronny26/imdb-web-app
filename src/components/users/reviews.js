@@ -39,6 +39,7 @@ function Reviews() {
                         <Link>
                         <p>Rating: {review.rating}</p>
                         <p>Comment: {review.comment}</p> </Link>
+                        <p>{review.blogLink}</p>
                         </div>
                     ))}
             </div>

@@ -95,6 +95,7 @@ const UserProfile = () => {
           <div key={index} className='review'>
             <div className='review-rating'>{review.rating}</div>
             <p>{review.comment}</p>
+            <p>{review.blogLink}</p>
           </div>
         ))}
       </div>
