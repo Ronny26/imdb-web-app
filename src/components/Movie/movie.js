@@ -5,7 +5,6 @@ import { FaStar } from 'react-icons/fa'
 import WatchlistButton from '../Watchlist'
 
 const Movie = ({ id, title, imageUrl, rating, userId }) => {
-  console.log(imageUrl, 'image url')
   let navigate = useNavigate()
   return (
     <div className='im-movie-tile-style'>
