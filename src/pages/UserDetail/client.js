@@ -52,7 +52,6 @@ export const getAllFollowers = async (userId) => {
   try {
     const url = `${DB_BASE_API}/api/following/${userId}`;
     const response = await axios.get(url);
-    console.log("followers", response);
     return response.data;
   } catch (error) {
     console.error("Error getting followers:", error);

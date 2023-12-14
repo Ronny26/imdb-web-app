@@ -51,7 +51,10 @@ const UserProfile = () => {
   const getAllFollowers = async () => {
     try {
       const response = await client.getAllFollowers(userId)
-      console.log(response)
+      const followingArrays = response.map((follower) => follower.following);
+      const allFollowers = [].concat(...followingArrays);
+      setUserFollows([...new Set(allFollowers)]);
+      console.log(userFollows)
     } catch (error) {
       console.error('Error following/unfollowing user:', error)
     }
@@ -91,11 +94,9 @@ const UserProfile = () => {
       </div>
       <div className='user-reviews'>
         <h2>User follows</h2>
-        {userReviews.map((review, index) => (
+        {userFollows.map((review, index) => (
           <div key={index} className='review'>
-            <div className='review-rating'>{review.rating}</div>
-            <p>{review.comment}</p>
-            <p>{review.blogLink}</p>
+            <p>{userFollows}</p>
           </div>
         ))}
       </div>
