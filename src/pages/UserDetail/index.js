@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import './UserProfile.css'
 import * as client from './client'
-import { useAuth } from "../../components/users/authenticateUser";
+import { useAuth } from '../../components/users/authenticateUser'
 
 import { FaUserCog } from 'react-icons/fa'
 
@@ -12,19 +12,29 @@ const UserProfile = () => {
   const { userId } = useParams()
   const [isFollowing, setIsFollowing] = useState(false)
   const { currentUser } = useAuth()
+  const [movies, setMovies] = useState([])
 
   const getUserReviews = async userId => {
     try {
       const response = await client.findReviewsByUserId(userId)
-      console.log(response.data)
-      setUserReviews(response)
+      const reviewsWithMovies = await Promise.all(
+        response.map(async review => {
+          const movieResponse = await client.getTitles(review.movieId)
+          return { ...review, movieName: movieResponse.title }
+        })
+      )
+      setUserReviews(reviewsWithMovies)
     } catch (error) {
-      console.error('Error fetching user:', error)
+      console.error('Error fetching user reviews:', error)
     }
   }
+
   const checkIfUserIsFollowed = async () => {
     try {
-      const isFollowed = await client.checkFollowStatus(currentUser ? currentUser._id : null, user.username)
+      const isFollowed = await client.checkFollowStatus(
+        currentUser ? currentUser._id : null,
+        user.username
+      )
       setIsFollowing(isFollowed)
     } catch (error) {
       console.error('Error checking follow status:', error)
@@ -73,6 +83,7 @@ const UserProfile = () => {
       <div className='user-reviews'>
         {userReviews.map((review, index) => (
           <div key={index} className='review'>
+            <h4>{review.movieName}</h4>
             <div className='review-rating'>{review.rating}</div>
             <p>{review.comment}</p>
           </div>
