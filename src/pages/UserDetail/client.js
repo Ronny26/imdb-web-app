@@ -27,17 +27,10 @@ export const findUserById = async (userId) => {
 
 export const followUnfollowUser = async (userId, usernameToFollow) => {
   try {
-<<<<<<< HEAD
-    const url = `${DB_BASE_API}/api/following/${userId}`;
-    const response = await axios.post(url, usernameToFollow);
-    console.log(userId);
-    return response.data;
-=======
     const url = `${DB_BASE_API}/api/following/${userId}`
     const response = await axios.post(url, { userId, usernameToFollow })
     console.log(userId)
     return response.data
->>>>>>> 55a6002 (follow api fix)
   } catch (error) {
     console.error(error);
   }
