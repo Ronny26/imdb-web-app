@@ -36,14 +36,25 @@ export const followUnfollowUser = async (userId, usernameToFollow) => {
   }
 };
 
-export const checkFollowStatus = async (userId) => {
+// export const checkFollowStatus = async (userId) => {
+//   try {
+//     const url = `${DB_BASE_API}/api/following/${userId}`;
+//     const response = await axios.get(url);
+//     console.log("follower", response);
+//     const isFollowing = false;
+//     return isFollowing;
+//   } catch (error) {
+//     console.error("Error checking follow status:", error);
+//   }
+// };
+
+export const getAllFollowers = async (userId) => {
   try {
     const url = `${DB_BASE_API}/api/following/${userId}`;
     const response = await axios.get(url);
-    console.log("follower", response);
-    const isFollowing = false;
-    return isFollowing;
+    console.log("followers", response);
+    return response.data;
   } catch (error) {
-    console.error("Error checking follow status:", error);
+    console.error("Error getting followers:", error);
   }
 };
