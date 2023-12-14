@@ -9,13 +9,23 @@ const UserProfile = () => {
   const [userReviews, setUserReviews] = useState([])
   const [user, setUser] = useState([])
   const { userId } = useParams()
+  const [isFollowing, setIsFollowing] = useState(false)
 
   const getUserReviews = async userId => {
     try {
       const response = await client.findReviewsByUserId(userId)
+      console.log(response.data)
       setUserReviews(response)
     } catch (error) {
       console.error('Error fetching user:', error)
+    }
+  }
+  const checkIfUserIsFollowed = async () => {
+    try {
+      const isFollowed = await client.checkFollowStatus(userId, user.username)
+      setIsFollowing(isFollowed)
+    } catch (error) {
+      console.error('Error checking follow status:', error)
     }
   }
 
@@ -27,10 +37,18 @@ const UserProfile = () => {
       console.error('Error fetching user:', error)
     }
   }
-
+  const handleFollowClick = async () => {
+    try {
+      await client.followUnfollowUser(userId, user.username)
+      setIsFollowing(!isFollowing)
+    } catch (error) {
+      console.error('Error following/unfollowing user:', error)
+    }
+  }
   useEffect(() => {
     getUser(userId)
     getUserReviews(userId)
+    checkIfUserIsFollowed()
   }, [])
 
   return (
@@ -46,6 +64,9 @@ const UserProfile = () => {
         <p className='user-email'>
           <i className='fas fa-envelope'></i> {user.email}
         </p>
+        <button className='follow-btn' onClick={handleFollowClick}>
+          {isFollowing ? 'Unfollow' : 'Follow'}
+        </button>
       </div>
       <div className='user-reviews'>
         {userReviews.map((review, index) => (
