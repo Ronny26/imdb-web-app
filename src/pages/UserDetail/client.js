@@ -24,3 +24,29 @@ export const findUserById = async userId => {
     console.error(error)
   }
 }
+
+export const followUnfollowUser = async (userId, usernameToFollow) => {
+  try {
+    const url = `${DB_BASE_API}/api/following`
+    const response = await axios.post(url, { userId, usernameToFollow })
+    console.log(userId)
+    return response.data
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const checkFollowStatus = async (userId, profileUsername) => {
+  try {
+    const url = `${DB_BASE_API}/api/following`
+    const response = await axios.get(url, {
+      params: { userId, profileUsername }
+    })
+    const isFollowing = response.data.some(
+      followedUser => followedUser.id === userId
+    )
+    return isFollowing
+  } catch (error) {
+    console.error('Error checking follow status:', error)
+  }
+}
