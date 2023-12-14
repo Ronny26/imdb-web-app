@@ -29,7 +29,9 @@ export const findUserById = async userId => {
 export const followUnfollowUser = async (userId, usernameToFollow) => {
   try {
     const url = `${DB_BASE_API}/api/following/${userId}`
-    const response = await axios.post(url, usernameToFollow)
+
+    const response = await axios.post(url, { userId, usernameToFollow })
+
     console.log(userId)
     return response.data
   } catch (error) {
@@ -37,17 +39,29 @@ export const followUnfollowUser = async (userId, usernameToFollow) => {
   }
 }
 
-export const checkFollowStatus = async userId => {
+
+// export const checkFollowStatus = async (userId) => {
+//   try {
+//     const url = `${DB_BASE_API}/api/following/${userId}`;
+//     const response = await axios.get(url);
+//     console.log("follower", response);
+//     const isFollowing = false;
+//     return isFollowing;
+//   } catch (error) {
+//     console.error("Error checking follow status:", error);
+//   }
+// };
+
+export const getAllFollowers = async (userId) => {
   try {
-    const url = `${DB_BASE_API}/api/following/${userId}`
-    const response = await axios.get(url)
-    console.log('follower', response)
-    const isFollowing = false
-    return isFollowing
+    const url = `${DB_BASE_API}/api/following/${userId}`;
+    const response = await axios.get(url);
+    return response.data;
   } catch (error) {
-    console.error('Error checking follow status:', error)
+    console.error("Error getting followers:", error);
   }
-}
+};
+
 
 export const getTitles = async movieId => {
   try {
@@ -58,3 +72,4 @@ export const getTitles = async movieId => {
     console.error(error)
   }
 }
+

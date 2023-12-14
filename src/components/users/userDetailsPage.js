@@ -30,11 +30,6 @@ function UserDeatils() {
             Reviews
           </Link>
         </li>)}
-        <li className={`nav-item ${activeTab === "other" ? "active" : ""}`}>
-          <Link to="/other" className="nav-link">
-            Following
-          </Link>
-        </li>
       </ul>
     </div>
     )

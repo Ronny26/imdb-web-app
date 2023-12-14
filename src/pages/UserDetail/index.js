@@ -8,6 +8,7 @@ import { FaUserCog } from 'react-icons/fa'
 
 const UserProfile = () => {
   const [userReviews, setUserReviews] = useState([])
+  const [userFollows, setUserFollows] = useState([])
   const [user, setUser] = useState([])
   const { userId } = useParams()
   const [isFollowing, setIsFollowing] = useState(false)
@@ -29,17 +30,15 @@ const UserProfile = () => {
     }
   }
 
-  const checkIfUserIsFollowed = async () => {
-    try {
-      const isFollowed = await client.checkFollowStatus(
-        currentUser ? currentUser._id : null,
-        user.username
-      )
-      setIsFollowing(isFollowed)
-    } catch (error) {
-      console.error('Error checking follow status:', error)
-    }
-  }
+  // const checkIfUserIsFollowed = async () => {
+  //   try {
+  //     const isFollowed = await client.checkFollowStatus(currentUser ? currentUser._id : null, user.username)
+  //     setIsFollowing(isFollowed)
+  //   } catch (error) {
+  //     console.error('Error checking follow status:', error)
+  //   }
+  // }
+
 
   const getUser = async userId => {
     try {
@@ -57,10 +56,22 @@ const UserProfile = () => {
       console.error('Error following/unfollowing user:', error)
     }
   }
+  const getAllFollowers = async () => {
+    try {
+      const response = await client.getAllFollowers(userId)
+      const followingArrays = response.map((follower) => follower.following);
+      const allFollowers = [].concat(...followingArrays);
+      setUserFollows([...new Set(allFollowers)]);
+      console.log(userFollows)
+    } catch (error) {
+      console.error('Error following/unfollowing user:', error)
+    }
+  }
   useEffect(() => {
     getUser(userId)
     getUserReviews(userId)
-    checkIfUserIsFollowed()
+    getAllFollowers()
+    // checkIfUserIsFollowed()
   }, [])
 
   return (
@@ -81,11 +92,20 @@ const UserProfile = () => {
         </button>
       </div>
       <div className='user-reviews'>
+        <h2>User reviews</h2>
         {userReviews.map((review, index) => (
           <div key={index} className='review'>
             <h4>{review.movieName}</h4>
             <div className='review-rating'>{review.rating}</div>
             <p>{review.comment}</p>
+          </div>
+        ))}
+      </div>
+      <div className='user-reviews'>
+        <h2>User follows</h2>
+        {userFollows.map((review, index) => (
+          <div key={index} className='review'>
+            <p>{userFollows}</p>
           </div>
         ))}
       </div>
