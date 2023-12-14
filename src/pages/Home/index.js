@@ -7,7 +7,6 @@ import Movie from "../../components/Movie/movie";
 import "./index.css";
 
 const Home = ({ adminMovies }) => {
-  console.log("admin movies", adminMovies);
   const [movies, setMovies] = useState([]);
   const [upcomingMovies, setUpcomingMovies] = useState([]);
   const [watchlistedMovies, setWatchlistedMovies] = useState([]);
@@ -94,8 +93,8 @@ const Home = ({ adminMovies }) => {
                 id={movie.id}
                 title={movie.title}
                 imageUrl={
-                  movie.primary_image
-                    ? movie.primary_image.url
+                  movie.primaryImage
+                    ? movie.primaryImage.url
                     : "https://www.dotyeti.com/wp-content/uploads/2023/01/barbie.webp"
                 }
                 rating={movie.rating}
