@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import './UserProfile.css'
 import * as client from './client'
+import { useAuth } from "../../components/users/authenticateUser";
 
 import { FaUserCog } from 'react-icons/fa'
 
@@ -10,6 +11,7 @@ const UserProfile = () => {
   const [user, setUser] = useState([])
   const { userId } = useParams()
   const [isFollowing, setIsFollowing] = useState(false)
+  const { currentUser } = useAuth()
 
   const getUserReviews = async userId => {
     try {
@@ -22,7 +24,7 @@ const UserProfile = () => {
   }
   const checkIfUserIsFollowed = async () => {
     try {
-      const isFollowed = await client.checkFollowStatus(userId, user.username)
+      const isFollowed = await client.checkFollowStatus(currentUser ? currentUser._id : null, user.username)
       setIsFollowing(isFollowed)
     } catch (error) {
       console.error('Error checking follow status:', error)
@@ -39,7 +41,7 @@ const UserProfile = () => {
   }
   const handleFollowClick = async () => {
     try {
-      await client.followUnfollowUser(userId, user.username)
+      await client.followUnfollowUser(currentUser._id, user.username)
       setIsFollowing(!isFollowing)
     } catch (error) {
       console.error('Error following/unfollowing user:', error)
