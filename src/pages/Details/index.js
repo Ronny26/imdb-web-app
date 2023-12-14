@@ -115,7 +115,7 @@ const MovieDetails = () => {
       <div className='row'>
         <div className='col-md-4'>
           <img
-            src={movieData.primary_image.url}
+            src={movieData.primary_image}
             alt={movieData.title}
             className='im-poster'
           />

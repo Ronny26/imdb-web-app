@@ -32,7 +32,7 @@ export const getMovieById = async (id) => {
       console.log(ratingsResponse)
       movie = {
         title: movieResponse.data.results.titleText.text,
-        primary_image: movieResponse.data.results.primaryImage ? movieResponse.data.results.primaryImage : {url:"https://www.dotyeti.com/wp-content/uploads/2023/01/barbie.webp"},
+        primary_image: movieResponse.data.results.primaryImage ? movieResponse.data.results.primaryImage : "https://www.dotyeti.com/wp-content/uploads/2023/01/barbie.webp",
         actors: actorsResponse.data.results ? actorsResponse.data.results : [],
         rating: ratingsResponse.data.results ? ratingsResponse.data.results.averageRating : "0",
       }
