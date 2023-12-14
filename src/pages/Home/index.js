@@ -45,19 +45,35 @@ const Home = ({ adminMovies }) => {
     }
   };
 
-  const getWatchlist = async (currentUser) => {
-    try {
-      const watchlist = await client.getWatchlist(currentUser ? currentUser._id : null);
-      setWatchlistedMovies(watchlist);
-    } catch (error) {
-      console.error("Error checking watchlist:", error);
-    }
-  }
+  // const getWatchlist = async (currentUser) => {
+  //   try {
+  //     const watchlist = await client.getWatchlist(currentUser ? currentUser._id : null);
+  //     setWatchlistedMovies(watchlist);
+  //   } catch (error) {
+  //     console.error("Error checking watchlist:", error);
+  //   }
+  // }
 
   useEffect(() => {
     getMovies();
     getUpcomingMovies();
-  }, []);
+    const getWatchlistedMovies = async () => {
+      try {
+        console.log("current user", currentUser);
+        console.log("watchlist page");
+        const response = await client.getWatchlist(currentUser._id);
+        console.log("Watchlist response:", response);
+        const watchlistMovies = response.map((watchlistItem) => watchlistItem.movie);
+
+        setWatchlistedMovies(watchlistMovies);
+      } catch (error) {
+        console.error("Error fetching movies:", error);
+      }
+    };
+    if (currentUser) {
+      getWatchlistedMovies();
+    }
+  }, [currentUser]);
 
   useEffect(() => {
     const allMovies = [...movies, ...upcomingMovies];
@@ -76,14 +92,14 @@ const Home = ({ adminMovies }) => {
               <Movie
                 key={movie.id}
                 id={movie.id}
-                title={movie.titleText.text}
+                title={movie.title}
                 imageUrl={
-                  movie.primaryImage
-                    ? movie.primaryImage.url
+                  movie.primary_image
+                    ? movie.primary_image.url
                     : "https://www.dotyeti.com/wp-content/uploads/2023/01/barbie.webp"
                 }
-                rating={ratings[movie.id] || 0}
-                userId={currentUser ? currentUser._id : null}
+                rating={movie.rating}
+              userId={currentUser ? currentUser._id : null}
               />
             ))}
           </div>
