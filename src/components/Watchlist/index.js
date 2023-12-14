@@ -12,7 +12,7 @@ const WatchlistButton = ({movieTitle, userId}) => {
         const watchlist = await client.getWatchlist(userId);
         const isWatchlisted = watchlist.some((item) => item.movieTitle === movieTitle);
         setClicked(isWatchlisted);
-        console.log("set clciked", isWatchlisted);
+        console.log("set clicked", isWatchlisted);
       } catch (error) {
         console.error("Error checking watchlist:", error);
       }
