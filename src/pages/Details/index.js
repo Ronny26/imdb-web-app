@@ -23,7 +23,8 @@ const MovieDetails = () => {
       userId: currentUser ? currentUser._id : null,
       movieId: movieId,
       rating: userRating,
-      comment: userFeedback
+      comment: userFeedback,
+      blogLink: blogLink
     }
     console.log(newUserReview)
     try {
@@ -56,7 +57,7 @@ const MovieDetails = () => {
     actors: ['Alice Johnson', 'David Thompson'],
     description: 'The Color Purple is a heartwarming drama...',
     rating: 6.8,
-    primary_image: {
+    primaryImage: {
       url: 'https://m.media-amazon.com/images/M/MV5BYjBkNGE0NGYtYmU5Ny00NjRiLTk5MmYtMWU4NzYxMDE4YWY4XkEyXkFqcGdeQXVyMTUzMTg2ODkz._V1_.jpg'
     }
   })
@@ -159,7 +160,7 @@ const MovieDetails = () => {
                   onChange={e => setUserFeedback(e.target.value)}
                 ></textarea>
               </div>
-              {currentUser.role == 'ADMIN' && (
+              {currentUser.role == 'CRITIC' && (
                 <div className='col-xs-6'>
                   <label htmlFor='blogLink'>Your blog:</label>
                   <input
@@ -196,6 +197,7 @@ const MovieDetails = () => {
                 </Link>
                 <p>Rating: {review.rating}</p>
                 <p>{review.comment}</p>
+                <p>{review.blogLink}</p>
               </li>
             ))}
           </ul>

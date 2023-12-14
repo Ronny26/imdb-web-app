@@ -76,7 +76,7 @@ export const findUserById = async (userId) => {
 export const createReview = async (review) => {
   try {
     const response = await axios.post(`${REVIEWS_API}/review`, review);
-    console.log(response.data);
+    console.log("review", response.data);
     return response.data;
   } catch (error) {
     console.error("Error creating review:", error);
